@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeu du chiffre caché</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: cadetblue;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      background-color: coral;
+    }
+  </style>
+</head>
+<body>
+  <h1>Jeu du chiffre caché</h1>
+  <button onclick="lancerPartie()">Commencer une partie</button>
+
+  <script>
+    function lancerPartie() {
+      const niveau = choisirNiveau();
+      const nombreSecret = genererNombreSecret(niveau);
+      jouer(nombreSecret, niveau);
+    }
+
+    function choisirNiveau() {
+      const niveau = prompt("Choisissez un niveau de difficulté : Facile, Intermédiaire, Difficile").toLowerCase();
+      switch (niveau) {
+        case "facile":
+          return { tentatives: 5, min: 1, max: 10 };
+        case "intermediaire":
+          return { tentatives: 10, min: 1, max: 50 };
+        case "difficile":
+          return { tentatives: 15, min: 1, max: 100 };
+        default:
+          alert("Niveau invalide, veuillez choisir entre Facile, Intermédiaire et Difficile.");
+          return choisirNiveau();
+      }
+    }
+
+    function genererNombreSecret(niveau) {
+      return Math.floor(Math.random() * (niveau.max - niveau.min + 1)) + niveau.min;
+    }
+
+    function jouer(nombreSecret, niveau) {
+      let essaisRestants = niveau.tentatives;
+
+      while (essaisRestants > 0) {
+        const essai = parseInt(prompt(`Il vous reste ${essaisRestants} essais. Entrez un nombre entre ${niveau.min} et ${niveau.max}:`));
+        
+        if (isNaN(essai) || essai < niveau.min || essai > niveau.max) {
+          alert("Nombre invalide. Veuillez entrer un nombre valide.");
+          continue;
+        }
+
+        if (essai === nombreSecret) {
+          alert("Bravo ! Vous avez trouvé le nombre secret !");
+          if (relancerPartie()) {
+            return lancerPartie();
+          } else {
+            return;
+          }
+        } else if (essai < nombreSecret) {
+          alert("Le nombre secret est plus grand.");
+        } else {
+          alert("Le nombre secret est plus petit.");
+        }
+
+        essaisRestants--;
+      }
+
+      alert(`Dommage ! Le nombre secret était ${nombreSecret}.`);
+      if (relancerPartie()) {
+        return lancerPartie();
+      }
+    }
+
+    function relancerPartie() {
+      return confirm("Voulez-vous rejouer ?");
+    }
+  </script>
+</body>
+</html>

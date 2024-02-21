@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Color</title>
+    <style>
+        *{
+            background-color: cadetblue;
+            font-size: 40px;
+            font-family: Arial;
+
+        }
+        .main{
+            position: absolute;
+            left:40%; 
+        }
+    </style>
+
+</head>
+<body >
+    <div class="main">
+        <ol>
+            <li class="el1" onclick="changeColor(this)">element1</li>
+            <li class="el2" onclick="changeColor(this)">element2</li>
+            <li class="el3" onclick="changeColor(this)">element3</li>
+            <li class="el4" onclick="changeColor(this)">element4</li>
+            <li class="el5" onclick="changeColor(this)">element5</li>
+        </ol>
+    </div>
+    <script>
+
+        function changeColor(element) {
+                element.style.color = randomColor();
+        }
+        function randomColor() {
+            return '#' + Math.floor(Math.random()*16777215).toString(16); //16777215 la valeur max que le couleur peut prendre en decimal
+        }
+    </script>
+</body>
+</html>

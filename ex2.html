@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Word</title>
+    <style>
+        body{
+            background-color: cadetblue;
+        }
+        input{
+            width: 100px;
+            height: 30px;
+            margin: 5px;
+            border-radius: 10px;
+        }
+    </style>
+        
+</head>
+<body>
+    <div>
+        <div>
+            <p style="text-align: center;" id="Test">Test</p>
+        </div>
+        <div style="display: block; text-align: center;"  >
+            <label for="sizePicker">Choose a size:</label>
+            <input type="number" name="size-button" id="sizeButton">
+            <label for="fontPicker">Choose a font:</label>
+            <input name="section" list='font-list' id="fonts">
+
+            
+            <datalist id='font-list'>
+                <option value="Arial">
+                <option value="Times New Roman">
+                <option value="Courier New">
+                <option value="Verdana">
+                <option value="Georgia">
+                <option value="Comic Sans MS">
+                <option value="Trebuchet MS">
+                <option value="Arial Black">   
+            </datalist>
+            <label for="colorPicker">Choose a color:</label>
+            <input type="color" id="colorPicker" name="colorPicker">
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("sizeButton").addEventListener("input", function() {
+            changeSize(this.value);
+        });
+
+        document.getElementById("fonts").addEventListener("input", function() {
+            changeFont(this.value);
+        });
+
+        document.getElementById("colorPicker").addEventListener("change", function() {
+            changeColor(this.value);
+        });
+
+        function changeColor(color) {
+            const selectedColorElement = document.getElementById("Test");
+            selectedColorElement.style.color = color; // Change text color to the selected color
+        }
+
+        function changeSize(size) {
+            const selectedColorElement = document.getElementById("Test");
+            selectedColorElement.style.fontSize = size + "px"; // Change text size to the selected size
+        }
+
+        function changeFont(font) {
+            const selectedColorElement = document.getElementById("Test");
+            selectedColorElement.style.fontFamily = font; // Change text font to the selected font
+        }
+    </script>
+</body>
+</html>

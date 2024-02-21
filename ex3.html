@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>To Do List</title>
+    <style>
+
+        body {
+            display: flex;
+            justify-content: space-between;
+        }
+        h4{
+            margin: 0;
+            padding: auto;
+        }
+
+        .lists {
+            width: 60%; 
+            
+        }
+
+        .todo {
+            position: fixed;
+            top: 25%;
+            width: 35%;
+            right: 0; 
+        }
+        .intodo{
+            align-items: center;
+        }
+        textarea,
+        .todo input[type="text"],
+        .todo button
+         {
+            width: 80%;
+            margin: 5px;
+            padding: 10px;     
+        }
+        textarea{
+            height: 100px;
+        }
+        .todo button {
+            background-color: aqua;
+            border: none;
+            border-radius: 5px;
+            width: 21%;
+        }
+
+
+        .divLi {
+            background-color: #f4f4f4;
+            color: black;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .lists p {
+            white-space: normal; /* Allow text to wrap */
+        }
+
+        #todolist {
+        list-style-type: none;
+        padding-left: 0;
+    }
+    </style>
+</head>
+<body>
+    <div class="lists">
+        <ol id="todolist"></ol>
+    </div>
+    <div class="todo">
+        <div class="intodo">
+            <h4><Nav>Name</Nav></h4>
+            <input type="text" name="name" id="name" placeholder="Name">
+            <h4>Content</h4>
+            <textarea type="text" name="content" id="content" placeholder="Content"></textarea>
+            <button onclick="addTodo()">Add</button>
+        </div>
+    </div>
+
+    <script>
+        function addTodo() {
+            const name = document.getElementById("name").value.trim(); 
+            const content = document.getElementById("content").value.trim(); 
+    
+            
+            if (name !== '' && content !== '') {
+                const todolist = document.getElementById("todolist");
+                const li = document.createElement("li");
+                li.innerHTML = `<div class="divLi"><p>${name} : ${content} </p><i class="fas fa-trash-alt" onclick="deleteTodoItem(this)"></i></div>`;
+                todolist.appendChild(li);
+                // Clear input fields after adding the task
+                document.getElementById("name").value = '';
+                document.getElementById("content").value = '';
+            } else {
+                alert("Please fill in both name and content fields.");
+            }
+        }
+    
+        function deleteTodoItem(element) {
+            element.parentNode.parentNode.remove(); 
+        }
+    </script>
+    
+    
+</body>
+</html>
